@@ -1,1 +1,45 @@
-<p>table works!</p>
+<section class="row p-5 mb-2 justify-content-center align-items-center">
+  <div class="col-6">
+    <label for="AddId">ID</label>
+    <input id="AddId" type="number" class="form-control" [(ngModel)]="tempDepartment.id"/>
+    <label for="AddId">Name</label>
+    <input id="AddName" type="text" class="form-control" [(ngModel)]="tempDepartment.name"/>
+    <label for="AddId">location</label>
+    <input id="AddLocation" type="text" class="form-control" [(ngModel)]="tempDepartment.location"/>
+    <button id="BtnAdd" class="btn btn-primary" (click)="add()">Add</button>
+  </div>
+  <div class="col-6">
+    <label for="AddId">ID</label>
+    <input id="EditId" type="number" class="form-control" [(ngModel)]="saveDepartment.id"/>
+    <label for="AddId">Name</label>
+    <input id="EditName" type="text" class="form-control" [(ngModel)]="saveDepartment.name"/>
+    <label for="AddId">location</label>
+    <input id="EditLocation" type="text" class="form-control" [(ngModel)]="saveDepartment.location"/>
+  </div>
+</section>
+
+
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let department of departments; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{department.id}}</td>
+    <td>{{department.name}}</td>
+    <td>{{department.location}}</td>
+    <td>
+      <button class="btn btn-danger m-1" (click)="delete(department.id)">Delete</button>
+      <button class="btn btn-warning m-1" (click)="edit(department.id)">Edit</button>
+
+    </td>
+  </tr>
+  </tbody>
+</table>

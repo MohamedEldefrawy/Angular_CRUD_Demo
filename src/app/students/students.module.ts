@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TableComponent } from './table/table.component';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TableComponent} from './table/table.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -9,10 +9,12 @@ import { TableComponent } from './table/table.component';
     TableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
-  exports:[
+  exports: [
     TableComponent
   ]
 })
-export class StudentsModule { }
+export class StudentsModule {
+}

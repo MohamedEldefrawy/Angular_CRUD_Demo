@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Product} from "../../model/product";
 
 @Component({
@@ -19,6 +19,8 @@ export class ProductsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toggleTableHeaders();
+
     this.products = [
       new Product(1, "X", "18.jpg", 10, new Date(), 1),
       new Product(2, "Y", "18.jpg", 20, new Date(), 2),
@@ -26,10 +28,7 @@ export class ProductsTableComponent implements OnInit {
       new Product(4, "A", "18.jpg", 40, new Date(), 4),
       new Product(5, "B", "18.jpg", 50, new Date(), 5),
     ];
-    if (this.isImageShow)
-      this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate", "Options"]
-    else
-      this.displayedColumns = ["ID", "Name", "Price", "Available", "Rate", "Options"]
+
   }
 
   onRateClicked(rateValue: number, id: number) {
@@ -48,5 +47,17 @@ export class ProductsTableComponent implements OnInit {
 
   delete(id: number) {
 
+  }
+
+  showImage() {
+    this.isImageShow = !this.isImageShow;
+    this.toggleTableHeaders();
+  }
+
+  toggleTableHeaders() {
+    if (this.isImageShow)
+      this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate", "Options"]
+    else
+      this.displayedColumns = ["ID", "Name", "Price", "Available", "Rate", "Options"]
   }
 }

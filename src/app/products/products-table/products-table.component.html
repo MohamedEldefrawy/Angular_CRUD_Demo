@@ -37,7 +37,7 @@
   </span>
 
 </p-dialog>
-<table mat-table [dataSource]="products" class="mat-elevation-z8">
+<table mat-table [dataSource]="products|arraySplice:searchKey " class="mat-elevation-z8">
   <ng-container matColumnDef="ID">
     <th mat-header-cell *matHeaderCellDef> Id.</th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -45,7 +45,7 @@
 
   <ng-container matColumnDef="Name">
     <th mat-header-cell *matHeaderCellDef> Name</th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.name | stringConvert}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Image">
@@ -55,12 +55,12 @@
 
   <ng-container matColumnDef="Price">
     <th mat-header-cell *matHeaderCellDef> Price</th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.price | currency:"EGP"}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Available">
     <th mat-header-cell *matHeaderCellDef> Available</th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.date | date:"dd/mm/yyyy"}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Rate">

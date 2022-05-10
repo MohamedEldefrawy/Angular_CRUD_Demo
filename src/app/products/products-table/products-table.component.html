@@ -1,0 +1,22 @@
+<table class="table table-hover table-hover table-bordered">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th *ngIf="isImageShow">Image</th>
+    <th>Name</th>
+    <th>Available</th>
+    <th>Price</th>
+    <th>Rate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products; let i = index;">
+    <td>{{product.id}}</td>
+    <td *ngIf="isImageShow">{{product.image}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.date}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.rate}}</td>
+  </tr>
+  </tbody>
+</table>

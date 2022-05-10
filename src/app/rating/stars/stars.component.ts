@@ -22,12 +22,11 @@ export class StarsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  onRateClicked() {
-    this.rateClicked.emit(this.score);
+  onRateClicked(rate: number) {
+    this.rateClicked.emit(rate);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.starAreaWidth = this.score * (90 / 5);
   }
-
 }

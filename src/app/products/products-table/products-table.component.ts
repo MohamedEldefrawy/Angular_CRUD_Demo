@@ -11,6 +11,9 @@ export class ProductsTableComponent implements OnInit {
   products: Product[] = [];
   isImageShow: boolean = false;
   displayedColumns: string[] = [];
+  display: boolean = false;
+  tempProduct: Product = new Product();
+  searchKey: string = "";
 
   constructor() {
   }
@@ -24,16 +27,26 @@ export class ProductsTableComponent implements OnInit {
       new Product(5, "B", "18.jpg", 50, new Date(), 5),
     ];
     if (this.isImageShow)
-      this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate"]
+      this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate", "Options"]
     else
-      this.displayedColumns = ["ID", "Name", "Price", "Available", "Rate"]
-
-
+      this.displayedColumns = ["ID", "Name", "Price", "Available", "Rate", "Options"]
   }
 
   onRateClicked(rateValue: number, id: number) {
     let selectedProduct = this.products.find(product => product.id === id);
     if (selectedProduct)
       selectedProduct.rate = rateValue;
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  edit(id: number) {
+
+  }
+
+  delete(id: number) {
+
   }
 }

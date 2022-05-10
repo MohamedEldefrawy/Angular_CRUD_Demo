@@ -1,36 +1,42 @@
-<!--<table class="table table-hover table-hover table-bordered">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th>No.</th>-->
-<!--    <th>Id</th>-->
-<!--    <th *ngIf="isImageShow">Image</th>-->
-<!--    <th>Name</th>-->
-<!--    <th>Available</th>-->
-<!--    <th>Price</th>-->
-<!--    <th>Rate</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr *ngFor="let product of products|arraySplice:''; let i = index;">-->
-<!--    <td>{{i + 1}}</td>-->
-<!--    <td>{{product.id}}</td>-->
-<!--    <td *ngIf="isImageShow">{{product.image}}</td>-->
-<!--    <td>{{product.name}}</td>-->
-<!--    <td>{{product.date}}</td>-->
-<!--    <td>{{product.price}}</td>-->
-<!--    <td>-->
-<!--      <app-stars [score]="product.rate" (rateClicked)="onRateClicked($event,product.id)"></app-stars>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
+<button pButton type="button" class="p-button-primary m-2" label="Add" (click)="showDialog()"></button>
+<div class="p-input-icon-left p-button-primary m-2">
+  <i class="pi pi-search"></i>
+  <input type="text" pInputText [(ngModel)]="searchKey" placeholder="Search">
+</div>
+<p-dialog class="justify-content-center align-items-center" header="Add New Product" [(visible)]="display">
+    <span class="p-float-label mb-4">
+      <p-inputNumber id="ID" [(ngModel)]="tempProduct.id" locale="en-US"></p-inputNumber>
+      <label for="ID">Id</label>
+  </span>
 
+  <span class="p-float-label mb-4">
+    <input id="name" type="text" [(ngModel)]="tempProduct.name" pInputText>
+    <label for="name">Name</label>
+  </span>
+
+  <span class="p-float-label mb-4">
+    <p-fileUpload id="image" name="myfile[]" url="./upload.php"></p-fileUpload>
+    <label for="image">Image</label>
+  </span>
+
+  <span class="p-float-label mb-4">
+    <p-inputNumber id="price" [(ngModel)]="tempProduct.price" mode="currency" currency="USD"
+                   locale="en-US"></p-inputNumber>
+    <label for="price">Price</label>
+  </span>
+
+  <span class="p-float-label mb-4">
+    <p-calendar id="available" [(ngModel)]="tempProduct.date"></p-calendar>
+    <label for="available">Available</label>
+  </span>
+
+  <span class="p-float-label mb-4">
+    <p-inputNumber id="rate" [(ngModel)]="tempProduct.rate" [min]="0" [max]="5"></p-inputNumber>
+    <label for="rate">Rate</label>
+  </span>
+
+</p-dialog>
 <table mat-table [dataSource]="products" class="mat-elevation-z8">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-  <!--//      this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate"]-->
-
   <ng-container matColumnDef="ID">
     <th mat-header-cell *matHeaderCellDef> Id.</th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -58,7 +64,17 @@
 
   <ng-container matColumnDef="Rate">
     <th mat-header-cell *matHeaderCellDef> Rate</th>
-    <td mat-cell *matCellDef="let element"> {{element.rate}} </td>
+    <td mat-cell *matCellDef="let element">
+      <app-stars [score]="element.rate" (rateClicked)="onRateClicked($event,element.id)"></app-stars>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Options">
+    <th mat-header-cell *matHeaderCellDef>Options</th>
+    <td mat-cell *matCellDef="let element">
+      <button pButton type="button" class="p-button-warning m-2" label="Edit" (click)="edit(element.id)"></button>
+      <button pButton type="button" class="p-button-danger m-2" label="Delete" (click)="delete(element.id)"></button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../../model/product";
 
 @Component({
@@ -20,7 +20,6 @@ export class ProductsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.toggleTableHeaders();
-
     this.products = [
       new Product(1, "X", "18.jpg", 10, new Date(), 1),
       new Product(2, "Y", "18.jpg", 20, new Date(), 2),
@@ -59,5 +58,14 @@ export class ProductsTableComponent implements OnInit {
       this.displayedColumns = ["ID", "Name", "Image", "Price", "Available", "Rate", "Options"]
     else
       this.displayedColumns = ["ID", "Name", "Price", "Available", "Rate", "Options"]
+  }
+
+  add() {
+    if (!(this.tempProduct.id === 0 || this.tempProduct.name === "" || this.tempProduct.image === "" || this.tempProduct.price === 0 || this.tempProduct.rate === 0)) {
+    } else {
+      const refreshedDataSource = [...this.products];
+      refreshedDataSource.push(new Product(this.tempProduct.id, this.tempProduct.name, this.tempProduct.image, this.tempProduct.price, this.tempProduct.date, this.tempProduct.rate));
+      this.products = refreshedDataSource;
+    }
   }
 }

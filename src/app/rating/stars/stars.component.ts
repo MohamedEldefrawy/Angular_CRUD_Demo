@@ -14,7 +14,7 @@ export class StarsComponent implements OnInit, OnChanges {
   @Output()
   rateClicked: EventEmitter<number> = new EventEmitter<number>();
 
-  starAreaWidth: number = 75;
+  starAreaWidth: number = 0;
 
   constructor() {
   }
@@ -27,6 +27,6 @@ export class StarsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.starAreaWidth = this.score * (90 / 5);
+    this.starAreaWidth = this.score * (75 / 5);
   }
 }

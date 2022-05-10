@@ -7,6 +7,7 @@ import {StudentsModule} from "./students/students.module";
 import {DepartmentsModule} from "./departments/departments.module";
 import {FormsModule} from "@angular/forms";
 import {ProductsModule} from "./products/products.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {ProductsModule} from "./products/products.module";
     StudentsModule,
     DepartmentsModule,
     FormsModule,
-    ProductsModule
+    ProductsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

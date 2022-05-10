@@ -6,6 +6,7 @@ import {RatingModule} from "../rating/rating.module";
 import { PowerToXPipe } from './power-to-x.pipe';
 import { StringConvertPipe } from './string-convert.pipe';
 import { ArraySplicePipe } from './array-splice.pipe';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ArraySplicePipe } from './array-splice.pipe';
   ],
   imports: [
     CommonModule,
-    RatingModule
+    RatingModule,
+    MatTableModule
   ],
   exports: [
     ProductsTableComponent

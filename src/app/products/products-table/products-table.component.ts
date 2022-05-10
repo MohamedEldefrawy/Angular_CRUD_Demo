@@ -23,4 +23,10 @@ export class ProductsTableComponent implements OnInit {
       new Product(5, "B", "18.jpg", 50, new Date(), 5),
     ];
   }
+
+  onRateClicked(rateValue: number, id: number) {
+    let selectedProduct = this.products.find(product => product.id === id);
+    if (selectedProduct)
+      selectedProduct.rate = rateValue;
+  }
 }

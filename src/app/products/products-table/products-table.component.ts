@@ -45,7 +45,9 @@ export class ProductsTableComponent implements OnInit {
   }
 
   delete(id: number) {
-
+    const refreshedDataSource = [...this.products];
+    refreshedDataSource.splice(refreshedDataSource.findIndex(product => product.id === id), 1);
+    this.products = refreshedDataSource;
   }
 
   showImage() {

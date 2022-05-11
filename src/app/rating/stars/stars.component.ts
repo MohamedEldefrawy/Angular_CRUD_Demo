@@ -27,6 +27,6 @@ export class StarsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.starAreaWidth = this.score * (75 / 5);
+    this.starAreaWidth = this.score * (80/5);
   }
 }

@@ -14,6 +14,8 @@ export class ProductsTableComponent implements OnInit {
   display: boolean = false;
   tempProduct: Product = new Product();
   searchKey: string = "";
+  displayModal: boolean = false;
+  selectedProduct: Product = new Product();
 
   constructor() {
   }
@@ -21,11 +23,11 @@ export class ProductsTableComponent implements OnInit {
   ngOnInit(): void {
     this.toggleTableHeaders();
     this.products = [
-      new Product(1, "X", "18.jpg", 10, new Date(), 1),
-      new Product(2, "Y", "18.jpg", 20, new Date(), 2),
-      new Product(3, "Z", "18.jpg", 30, new Date(), 3),
-      new Product(4, "A", "18.jpg", 40, new Date(), 4),
-      new Product(5, "B", "18.jpg", 50, new Date(), 5),
+      new Product(1, "ITI X", "18.jpg", 10, new Date(), 1),
+      new Product(2, "ITI Y", "18.jpg", 20, new Date(), 2),
+      new Product(3, "AIET Z", "18.jpg", 30, new Date(), 3),
+      new Product(4, "AIET A", "18.jpg", 40, new Date(), 4),
+      new Product(5, "AIET B", "18.jpg", 50, new Date(), 5),
     ];
 
   }
@@ -41,7 +43,22 @@ export class ProductsTableComponent implements OnInit {
   }
 
   edit(id: number) {
+    let selectedProductIndex = this.products.findIndex(product => product.id === id);
+    const refreshedDataSource = [...this.products];
 
+    refreshedDataSource.splice(selectedProductIndex, 1, new Product(this.selectedProduct.id, this.selectedProduct.name,
+      this.selectedProduct.image, this.selectedProduct.price
+      , this.selectedProduct.date, this.selectedProduct.rate));
+
+    this.products = refreshedDataSource;
+    this.displayModal = false;
+
+    this.selectedProduct.id = 0;
+    this.selectedProduct.name = "";
+    this.selectedProduct.image = "";
+    this.selectedProduct.price = 0;
+    this.selectedProduct.date = new Date();
+    this.selectedProduct.rate = 0;
   }
 
   delete(id: number) {
@@ -68,6 +85,17 @@ export class ProductsTableComponent implements OnInit {
       const refreshedDataSource = [...this.products];
       refreshedDataSource.push(new Product(this.tempProduct.id, this.tempProduct.name, this.tempProduct.image, this.tempProduct.price, this.tempProduct.date, this.tempProduct.rate));
       this.products = refreshedDataSource;
+
+      this.tempProduct.id = 0;
+      this.tempProduct.name = "";
+      this.tempProduct.image = "";
+      this.tempProduct.price = 0;
+      this.tempProduct.date = new Date();
+      this.tempProduct.rate = 0;
     }
+  }
+
+  showModalDialog() {
+    this.displayModal = true;
   }
 }

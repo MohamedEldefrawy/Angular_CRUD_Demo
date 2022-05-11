@@ -1,5 +1,7 @@
 <button pButton type="button" class="p-button-primary m-2" label="Add" (click)="showDialog()"></button>
 <button pButton type="button" class="p-button-secondary m-2" label="Show Image" (click)="showImage()"></button>
+<!--<p-button ></p-button>-->
+
 <div class="p-input-icon-left p-button-primary m-2">
   <i class="pi pi-search"></i>
   <input type="text" pInputText [(ngModel)]="searchKey" placeholder="Search">
@@ -16,7 +18,7 @@
   </span>
 
   <span class="p-float-label mb-4">
-    <p-fileUpload id="image" name="myfile[]" url="./upload.php"></p-fileUpload>
+    <p-fileUpload id="image" [(ngModel)]="tempProduct.image" name="myfile[]" url="./upload.php"></p-fileUpload>
     <label for="image">Image</label>
   </span>
 
@@ -61,7 +63,7 @@
 
   <ng-container matColumnDef="Available">
     <th mat-header-cell *matHeaderCellDef> Available</th>
-    <td mat-cell *matCellDef="let element"> {{element.date | date:"dd/mm/yyyy"}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.date | date:"dd/MM/yyyy"}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Rate">
@@ -74,8 +76,46 @@
   <ng-container matColumnDef="Options">
     <th mat-header-cell *matHeaderCellDef>Options</th>
     <td mat-cell *matCellDef="let element">
-      <button pButton type="button" class="p-button-warning m-2" label="Edit" (click)="edit(element.id)"></button>
+      <button pButton type="button" label="Edit" (click)="showModalDialog()" class="p-button-warning m-2"></button>
       <button pButton type="button" class="p-button-danger m-2" label="Delete" (click)="delete(element.id)"></button>
+
+      <p-dialog header="Edit Product" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+                [draggable]="false" [resizable]="false">
+
+          <span class="p-float-label mb-4">
+             <input id="editName" value="{{element.name}}" type="text" [(ngModel)]="selectedProduct.name" pInputText>
+              <label for="editName">Name</label>
+          </span>
+
+        <span class="p-float-label mb-4">
+            <p-fileUpload id="editImage" [(ngModel)]="selectedProduct.image" name="myfile"
+                          url="./upload.php">
+            </p-fileUpload>
+            <label for="editImage">Image</label>
+        </span>
+        <span class="p-float-label mb-4">
+            <p-inputNumber id="editPrice" [(ngModel)]="selectedProduct.price" mode="currency"
+                           currency="USD"
+                           locale="en-US">
+            </p-inputNumber>
+            <label for="editPrice">Price</label>
+        </span>
+
+        <span class="p-float-label mb-4">
+            <p-calendar id="editeAvailable" [(ngModel)]="selectedProduct.date">element.date</p-calendar>
+            <label for="editeAvailable">Available</label>
+        </span>
+
+        <span class="p-float-label mb-4">
+            <p-inputNumber id="editRate" [(ngModel)]="selectedProduct.rate" [min]="0"
+                           [max]="5">{{element.rate}}</p-inputNumber>
+             <label for="editRate">Rate</label>
+         </span>
+
+        <ng-template pTemplate="footer">
+          <p-button (click)="edit(element.id)" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+      </p-dialog>
     </td>
   </ng-container>
 

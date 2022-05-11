@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../model/product";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-products-table',
@@ -17,7 +18,7 @@ export class ProductsTableComponent implements OnInit {
   displayModal: boolean = false;
   selectedProduct: Product = new Product();
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -43,8 +44,10 @@ export class ProductsTableComponent implements OnInit {
   }
 
   edit(id: number) {
+
+    console.log(this.products.find(product => product.id === id));
     let selectedProductIndex = this.products.findIndex(product => product.id === id);
-    const refreshedDataSource = [...this.products];
+    let refreshedDataSource = [...this.products];
 
     refreshedDataSource.splice(selectedProductIndex, 1, new Product(this.selectedProduct.id, this.selectedProduct.name,
       this.selectedProduct.image, this.selectedProduct.price
@@ -53,13 +56,9 @@ export class ProductsTableComponent implements OnInit {
     this.products = refreshedDataSource;
     this.displayModal = false;
 
-    this.selectedProduct.id = 0;
-    this.selectedProduct.name = "";
-    this.selectedProduct.image = "";
-    this.selectedProduct.price = 0;
-    this.selectedProduct.date = new Date();
-    this.selectedProduct.rate = 0;
+    this.refreshUi(this.selectedProduct);
   }
+
 
   delete(id: number) {
     const refreshedDataSource = [...this.products];
@@ -85,20 +84,23 @@ export class ProductsTableComponent implements OnInit {
       const refreshedDataSource = [...this.products];
       refreshedDataSource.push(new Product(this.tempProduct.id, this.tempProduct.name, this.tempProduct.image, this.tempProduct.price, this.tempProduct.date, this.tempProduct.rate));
       this.products = refreshedDataSource;
-
-      this.tempProduct.id = 0;
-      this.tempProduct.name = "";
-      this.tempProduct.image = "";
-      this.tempProduct.price = 0;
-      this.tempProduct.date = new Date();
-      this.tempProduct.rate = 0;
+      this.refreshUi(this.tempProduct);
     }
   }
 
   showModalDialog(id: number) {
-    this.displayModal = true;
     let product = this.products.find(product => product.id === id);
     if (product)
-      this.selectedProduct = product;
+      this.selectedProduct = new Product(product.id, product.name, product.image, product.price, product.date, product.rate);
+    this.displayModal = true;
+  }
+
+  refreshUi(product: Product) {
+    product.id = 0;
+    product.name = "";
+    product.image = "";
+    product.price = 0;
+    product.date = new Date();
+    product.rate = 0;
   }
 }

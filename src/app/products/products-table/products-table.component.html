@@ -18,7 +18,7 @@
   </span>
 
   <span class="p-float-label mb-4">
-    <p-fileUpload id="image" [(ngModel)]="tempProduct.image" name="myfile[]" url="./upload.php"></p-fileUpload>
+    <p-fileUpload id="image" name="myfile[]" url="./upload.php"></p-fileUpload>
     <label for="image">Image</label>
   </span>
 
@@ -89,7 +89,7 @@
           </span>
 
         <span class="p-float-label mb-4">
-            <p-fileUpload id="editImage" [(ngModel)]="selectedProduct.image" name="myfile"
+            <p-fileUpload id="editImage"  name="myfile"
                           url="./upload.php">
             </p-fileUpload>
             <label for="editImage">Image</label>
@@ -114,7 +114,7 @@
          </span>
 
         <ng-template pTemplate="footer">
-          <p-button (click)="edit(element.id)" label="Ok" styleClass="p-button-text"></p-button>
+          <p-button (click)="edit(selectedProduct.id)" label="Ok" styleClass="p-button-text"></p-button>
         </ng-template>
       </p-dialog>
     </td>

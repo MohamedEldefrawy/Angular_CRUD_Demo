@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../model/product";
 import {HttpClient} from "@angular/common/http";
+import {FileUpload} from "primeng/fileupload";
 
 @Component({
   selector: 'app-products-table',
@@ -79,7 +80,7 @@ export class ProductsTableComponent implements OnInit {
   }
 
   add() {
-    if (!(this.tempProduct.id === 0 || this.tempProduct.name === "" || this.tempProduct.image === "" || this.tempProduct.price === 0 || this.tempProduct.rate === 0)) {
+    if ((this.tempProduct.id === 0 || this.tempProduct.name === "" || this.tempProduct.image === "" || this.tempProduct.price === 0 || this.tempProduct.rate === 0)) {
     } else {
       const refreshedDataSource = [...this.products];
       refreshedDataSource.push(new Product(this.tempProduct.id, this.tempProduct.name, this.tempProduct.image, this.tempProduct.price, this.tempProduct.date, this.tempProduct.rate));
@@ -102,5 +103,13 @@ export class ProductsTableComponent implements OnInit {
     product.price = 0;
     product.date = new Date();
     product.rate = 0;
+  }
+
+  onEditProductImageSelected(imagePath: FileUpload) {
+    this.selectedProduct.image = imagePath.files[0].name
+  }
+
+  onCreateProductImageSelected(imagePath: FileUpload) {
+    this.tempProduct.image = imagePath.files[0].name;
   }
 }

@@ -18,7 +18,8 @@
   </span>
 
   <span class="p-float-label mb-4">
-    <p-fileUpload id="image" name="myfile[]" url="./upload.php"></p-fileUpload>
+    <p-fileUpload id="image" #imagePath (change)="onCreateProductImageSelected(imagePath)"
+                  name="myfile[]"></p-fileUpload>
     <label for="image">Image</label>
   </span>
 
@@ -89,7 +90,7 @@
           </span>
 
         <span class="p-float-label mb-4">
-            <p-fileUpload id="editImage"  name="myfile"
+            <p-fileUpload #imagePath (change)="onEditProductImageSelected(imagePath)" id="editImage" name="myfile"
                           url="./upload.php">
             </p-fileUpload>
             <label for="editImage">Image</label>

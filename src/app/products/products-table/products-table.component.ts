@@ -95,7 +95,10 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
-  showModalDialog() {
+  showModalDialog(id: number) {
     this.displayModal = true;
+    let product = this.products.find(product => product.id === id);
+    if (product)
+      this.selectedProduct = product;
   }
 }

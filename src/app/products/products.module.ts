@@ -14,7 +14,12 @@ import {InputTextModule} from "primeng/inputtext";
 import {FileUploadModule} from "primeng/fileupload";
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
+import {RouterModule, Routes} from "@angular/router";
 
+
+const routes: Routes = [{
+  path: '', component: ProductsTableComponent
+}]
 
 @NgModule({
   declarations: [
@@ -34,7 +39,8 @@ import {CalendarModule} from 'primeng/calendar';
     InputTextModule,
     FileUploadModule,
     HttpClientModule,
-    CalendarModule
+    CalendarModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     ProductsTableComponent

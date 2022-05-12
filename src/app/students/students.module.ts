@@ -2,7 +2,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TableComponent} from './table/table.component';
 import {FormsModule} from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
 
+const routes: Routes = [{
+  path: '', component: TableComponent
+}]
 
 @NgModule({
   declarations: [
@@ -10,7 +14,8 @@ import {FormsModule} from "@angular/forms";
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     TableComponent

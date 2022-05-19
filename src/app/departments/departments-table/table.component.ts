@@ -36,6 +36,7 @@ export class TableComponent implements OnInit {
       )).subscribe(data => {
         this.departmentService.selectAll().subscribe((data) => {
           this.departments = data;
+          this.displayAddModal = false;
         })
       });
 

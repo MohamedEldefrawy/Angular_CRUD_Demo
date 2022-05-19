@@ -11,7 +11,6 @@ export class TableComponent implements OnInit {
 
   public departments: Department[] = [];
   public tempDepartment: Department = new Department();
-  public saveDepartment: Department = new Department();
   searchKey: string = "";
   displayModal: boolean = false;
   displayAddModal: boolean = false;
@@ -23,14 +22,15 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.departments = this.departmentService.selectAll();
+    this.departmentService.selectAll().subscribe((data) => {
+      this.departments = data;
+    });
   }
 
   add() {
-    if (this.tempDepartment.id !== 0 || this.tempDepartment.name !== "" || this.tempDepartment.location !== "") {
-      console.log("Fired");
+    if (this.tempDepartment._id !== 0 || this.tempDepartment.name !== "" || this.tempDepartment.location !== "") {
       this.departments = this.departmentService.add(new Department(
-        this.tempDepartment.id,
+        this.tempDepartment._id,
         this.tempDepartment.name,
         this.tempDepartment.location
       ));
@@ -44,10 +44,14 @@ export class TableComponent implements OnInit {
   }
 
   edit(id: number) {
-    let selectedDepartment = this.departments.filter(department => department.id === id)[0];
-    this.departments = this.departmentService.edit(new Department(this.selectedDepartment.id, this.selectedDepartment.name, this.selectedDepartment.location));
-    this.displayModal = false;
-    this.clearUi(this.saveDepartment);
+    let selectedDepartment = this.departments.filter(department => department._id === id)[0];
+    this.departmentService.edit(new Department(this.selectedDepartment._id, this.selectedDepartment.name, this.selectedDepartment.location)).subscribe((data) => {
+      this.displayModal = false;
+      this.clearUi(this.selectedDepartment);
+      this.departmentService.selectAll().subscribe(data => {
+        this.departments = data;
+      })
+    });
   }
 
   showDialog() {
@@ -55,14 +59,14 @@ export class TableComponent implements OnInit {
   }
 
   showModalDialog(id: number) {
-    let department = this.departments.find(department => department.id === id);
+    let department = this.departments.find(department => department._id === id);
     if (department)
-      this.selectedDepartment = new Department(department.id, department.name, department.location);
+      this.selectedDepartment = new Department(department._id, department.name, department.location);
     this.displayModal = true;
   }
 
   clearUi(department: Department) {
-    department.id = 0;
+    department._id = 0;
     department.name = "";
     department.location = "";
   }

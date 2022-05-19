@@ -1,20 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Department} from "../model/department";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
   private departments: Department[] = [];
+  private url: string = "http://localhost:8080/departments/";
 
-  constructor() {
-    this.departments = [
-      new Department(1, "OS", "ALEX"),
-      new Department(2, "PD", "Cairo"),
-      new Department(3, "AI", "Cairo"),
-      new Department(4, "Mobile", "ALEX"),
-      new Department(5, "UI", "ALEX"),
-    ];
+  constructor(private http: HttpClient) {
   }
 
   public add(department: Department) {
@@ -25,23 +20,19 @@ export class DepartmentService {
   }
 
   public edit(department: Department) {
-    let selectedDepartmentIndex = this.departments.findIndex(p => p.id === department.id);
-    let temp = [...this.departments];
-    temp.splice(selectedDepartmentIndex, 1, department);
-    this.departments = temp;
-    return temp;
+    return this.http.put<Department[]>(this.url + department._id, department);
   }
 
   public selectAll() {
-    return this.departments;
+    return this.http.get<Department[]>(this.url);
   }
 
   public select(id: number) {
-    return this.departments.find(p => p.id === id);
+    return this.departments.find(p => p._id === id);
   }
 
   public delete(id: number) {
-    let selectedDepartmentIndex = this.departments.findIndex(p => p.id === id);
+    let selectedDepartmentIndex = this.departments.findIndex(p => p._id === id);
     let temp = [...this.departments];
     temp.splice(selectedDepartmentIndex, 1);
     this.departments = temp

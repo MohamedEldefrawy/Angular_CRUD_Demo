@@ -29,10 +29,6 @@ export class DepartmentService {
   }
 
   public delete(id: number) {
-    let selectedDepartmentIndex = this.departments.findIndex(p => p._id === id);
-    let temp = [...this.departments];
-    temp.splice(selectedDepartmentIndex, 1);
-    this.departments = temp
-    return temp;
+    return this.http.delete<Department>(this.url + id);
   }
 }

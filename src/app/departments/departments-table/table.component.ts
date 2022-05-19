@@ -44,7 +44,11 @@ export class TableComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.departments = this.departmentService.delete(id);
+    this.departmentService.delete(id).subscribe(data => {
+      this.departmentService.selectAll().subscribe(data => {
+        this.departments = data;
+      })
+    })
   }
 
   edit(id: number) {

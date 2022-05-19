@@ -5,7 +5,7 @@ import {Product} from "../model/product";
   name: 'arraySplice'
 })
 export class ArraySplicePipe implements PipeTransform {
-  transform(value: Product[], filter: string): Product[] {
+  transform(value: any[], filter: string): any[] {
     return value.filter(item => item.name.includes(filter));
   }
 }

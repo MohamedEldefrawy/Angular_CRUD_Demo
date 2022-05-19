@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../model/product";
 import {HttpClient} from "@angular/common/http";
 import {FileUpload} from "primeng/fileupload";
-import {ProductService} from "../../product.service";
+import {ProductService} from "../../services/product.service";
 
 @Component({
-  selector: 'app-products-table',
+  selector: 'app-products-departments-table',
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.css']
 })

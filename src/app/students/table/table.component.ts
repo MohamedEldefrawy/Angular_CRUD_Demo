@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Student} from "../../model/student";
 
 @Component({
-  selector: 'app-student-table',
+  selector: 'app-student-departments-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })

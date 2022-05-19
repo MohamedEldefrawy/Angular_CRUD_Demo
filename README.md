@@ -9,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Build
 
 - Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-- OR build docker image from the project using ```sudo docker build -t angular-crud-demo``` then run a container using ``sudo docker container run -d -p 4200:80 angular-crud-demo``
+- OR build docker image from the project using ```sudo docker build -t angular-crud-demo .``` then run a container using ``sudo docker container run -d -p 4200:80 angular-crud-demo``
 
 
 ### Overview

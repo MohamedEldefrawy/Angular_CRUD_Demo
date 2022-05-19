@@ -78,4 +78,6 @@ export class TableComponent implements OnInit {
     department.name = "";
     department.location = "";
   }
+
+
 }

@@ -13,10 +13,7 @@ export class DepartmentService {
   }
 
   public add(department: Department) {
-    let temp = [...this.departments];
-    temp.push(department);
-    this.departments = temp;
-    return temp;
+    return this.http.post<Department[]>(this.url, department);
   }
 
   public edit(department: Department) {

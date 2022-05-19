@@ -29,11 +29,15 @@ export class TableComponent implements OnInit {
 
   add() {
     if (this.tempDepartment._id !== 0 || this.tempDepartment.name !== "" || this.tempDepartment.location !== "") {
-      this.departments = this.departmentService.add(new Department(
+      this.departmentService.add(new Department(
         this.tempDepartment._id,
         this.tempDepartment.name,
         this.tempDepartment.location
-      ));
+      )).subscribe(data => {
+        this.departmentService.selectAll().subscribe((data) => {
+          this.departments = data;
+        })
+      });
 
       this.clearUi(this.tempDepartment);
     }
